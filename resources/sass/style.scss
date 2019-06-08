@@ -660,6 +660,14 @@ hr.small {
   opacity: 0.75;
 }
 
+#video {
+  position: absolute;
+  top: 50%;
+  margin-top: -240px;
+  margin-left: -360px;
+  left: 50%;
+}
+
 @media (max-width: 767px){
 	.takePic {
 		bottom: auto;

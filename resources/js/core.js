@@ -13,7 +13,16 @@ var photoBooth = (function () {
         gallery = $('#gallery'),
         processing = false,
         pswp = {},
-        resultPage = $('#result');
+        resultPage = $('#result'),
+				stream,
+        webcamConstraints = {
+            audio: false,
+            video: {
+                width: 720,
+                height: 480,
+                facingMode: "user",
+            }
+        };
 
     // timeOut function
     public.resetTimeOut = function () {
@@ -84,6 +93,11 @@ var photoBooth = (function () {
     public.takePic = function () {
         processing = true;
         setTimeout(function () {
+						if(useVideo){
+							var track = public.stream.getTracks()[0];
+							track.stop();
+							$('video').hide();
+						}
             $('#counter').text('');
             $('.spinner').show();
             $('.loading').text(L10N.busy);
@@ -129,7 +143,6 @@ var photoBooth = (function () {
             $.ajax({
                 url: 'print.php?filename=' + encodeURI(result.img),
             }).done(function (data) {
-                console.log(data)
             })
         });
 
@@ -137,9 +150,9 @@ var photoBooth = (function () {
         public.addImage(result.img);
 
         // Add Image
-        $('<img src="/images/' + result.img + '" class="original">').load(function () {
+        $('<img src="/'+imgFolder+'/' + result.img + '" class="original">').load(function () {
             $('#result').css({
-                'background-image': 'url(/images/' + result.img + ')'
+                'background-image': 'url(/'+imgFolder+'/' + result.img + ')'
             });
             startPage.fadeOut(400, function () {
                 resultPage.fadeIn(400, function () {
@@ -162,7 +175,7 @@ var photoBooth = (function () {
     // add image to Gallery
     public.addImage = function (image) {
         // fixme: set to appendTo, if new images should appear at the end, or to prependTo, if new images should appear at the beginning
-        var $node = $('<a>').html('<img src="/thumbs/' + image + '" />').data('size', '1920x1280').attr('href', '/images/' + image + '?new=1')
+        var $node = $('<a>').html('<img src="/'+thumbFolder+'/' + image + '" />').data('size', '1920x1280').attr('href', '/'+imgFolder+'/' + image + '?new=1')
         if (gallery_newest_first) {
             $node.prependTo($('#galimages'));
         } else {
@@ -206,6 +219,20 @@ var photoBooth = (function () {
         } else {
             if (!processing) {
                 public.reset();
+								if(useVideo && navigator.mediaDevices){
+									navigator.getMedia = (navigator.mediaDevices.getUserMedia || navigator.mediaDevices.webkitGetUserMedia || navigator.mediaDevices.mozGetUserMedia || false);
+									if(navigator.getMedia) {
+										navigator.mediaDevices.getUserMedia(webcamConstraints)
+										.then(function(stream) {
+											$('video').show();
+											var video = document.getElementById('video');
+											video.srcObject = stream;
+											public.stream = stream;
+										})
+										.catch(function (error) {
+										});
+									}
+								}
                 loader.slideDown('slow', 'easeOutBounce', function () {
                     public.countdown(countDown, $('#counter'));
                 });
@@ -256,7 +283,8 @@ var photoBooth = (function () {
         } else {
             pswpQR.empty();
             var img = pswp.currItem.src;
-            img = img.replace('/images/', '');
+            img = img.split('/').pop();
+
             $('<img>').attr('src', 'qrcode.php?filename=' + img).appendTo(pswpQR);
 
             pswpQR.addClass('qr-active').fadeIn('fast');
@@ -266,11 +294,10 @@ var photoBooth = (function () {
     $(document).on('click touchstart', '.gal-print', function (e) {
         e.preventDefault();
         var img = pswp.currItem.src;
-        img = img.replace('images/', '');
+        img = img.replace(imgFolder+'/', '');
         $.ajax({
             url: 'print.php?filename=' + encodeURI(img),
         }).done(function (data) {
-            console.log(data)
         })
     });
 
@@ -278,7 +305,7 @@ var photoBooth = (function () {
         var target = $(e.target);
 
         // Menü in and out
-        if (!target.hasClass('qrbtn') && target.closest('.qrbtn').length == 0 && !target.hasClass('newpic') && !target.hasClass('printbtn') && target.closest('.printbtn').length == 0 && !target.hasClass('resetBtn') && !target.hasClass('gallery') && qr != true && !target.hasClass('homebtn')) {
+        if (!target.hasClass('qrbtn') && target.closest('.qrbtn').length == 0 && !target.hasClass('newpic') && !target.hasClass('printbtn') && target.closest('.printbtn').length == 0 && !target.hasClass('resetBtn') && !target.hasClass('gallery') && qr != true && !target.hasClass('homebtn') && target.closest('.homebtn').length == 0) {
             if ($('.resultInner').hasClass('hidden')) {
                 $('.resultInner').stop().animate({
                     'bottom': '50px'
@@ -308,7 +335,7 @@ var photoBooth = (function () {
         }
 
         // Go to Home
-        if (target.hasClass('homebtn')) {
+        if (target.hasClass('homebtn') || target.closest('.homebtn').length > 0) {
             window.location = window.location.origin;
         }
 

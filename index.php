@@ -1,14 +1,26 @@
 <?php
 
 require_once('config.inc.php');
+require_once('folders.php');
 require_once('db.php');
 
 ?>
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
 	<title>Photobooth</title>
+
+
+	<!-- Favicon + Android/iPhone Icons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/resources/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/resources/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/resources/img/favicon-16x16.png">
+	<link rel="manifest" href="/resources/img/site.webmanifest">
+	<link rel="mask-icon" href="/resources/img/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
 	<link rel="stylesheet" href="/resources/css/normalize.css" />
 	<link rel="stylesheet" href="/resources/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="/resources/css/photoswipe.css">
@@ -16,6 +28,9 @@ require_once('db.php');
 	<link rel="stylesheet" href="/resources/css/style.css" />
 	<script type="text/javascript">
 		var isdev = true;
+		var useVideo = <?php echo ($config['previewFromCam']) ? 'true' : 'false'; ?>;
+		var imgFolder = <?php echo '"'.$config['folders']['images'].'"'; ?>;
+		var thumbFolder = <?php echo '"'.$config['folders']['thumbs'].'"'; ?>;
 		var gallery_newest_first = <?php echo ($config['gallery']['newest_first']) ? 'true' : 'false'; ?>;
 	</script>
 </head>
@@ -35,6 +50,11 @@ require_once('db.php');
 
 		<!-- Loader -->
 		<div class="stages" id="loader">
+			<?php
+				if($config['previewFromCam']) {
+					echo '<video id="video" autoplay></video>';
+				}
+			?>
 			<div class="loaderInner">
 			<div class="spinner">
 				<i class="fa fa-cog fa-spin"></i>
@@ -68,8 +88,12 @@ require_once('db.php');
 					<?php
 					$imagelist = ($config['gallery']['newest_first'] === true) ? array_reverse($images) : $images;
 					foreach($imagelist as $image) {
-						echo '<a href="/images/'.$image.'" data-size="1920x1280">
-								<img src="/thumbs/'.$image.'" />
+
+						$filename_photo = $config['folders']['images'] . DIRECTORY_SEPARATOR . $image;
+						$filename_thumb = $config['folders']['thumbs'] . DIRECTORY_SEPARATOR . $image;
+
+						echo '<a href="'.$filename_photo.'" data-size="1920x1280">
+								<img src="'.$filename_thumb.'" />
 								<figure>Caption</figure>
 							</a>';
 					}

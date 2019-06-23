@@ -170,6 +170,10 @@ sudo crontab -e
 @reboot python /var/www/html/button.py &
 ```
 
+### Donation
+If you like my work and like to keep me motivated you can buy me a coconut water
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.me/andreasblaesius)
+
 ### Changelog
 - 1.8.3: Adjust scrollbar config and add blue-gray scrollbar theme, allow using Pi Cam for preview and to take pictures, add hidden shortcut for admin settings, add polaroid effect, add print confirmation dialogue
 - 1.8.2: Added spanish as supported language, print text on picture feature, optional blue-gray theme, adjust admin panel. Small bugfixes and improvements as always.

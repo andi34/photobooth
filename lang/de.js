@@ -36,6 +36,7 @@ L10N = {
 	"file_format_date": "Bilder mit Datum benennen",
 	"chroma_keying": "Chroma-Keying erlauben",
 	"keyingerror" : "Chroma-Keying nicht möglich!",
+	"cups_button": "CUPS Taste anzeigen",
 	"use_print": "Drucken aktivieren",
 	"use_qr": "QR-Code aktivieren",
 	"print_qrcode" : "QR-Code auf dem Bild beim Drucken",

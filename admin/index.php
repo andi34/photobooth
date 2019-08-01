@@ -111,6 +111,11 @@ if (file_exists($my_config)) {
 				'name' => 'use_collage',
 				'value' => $config['use_collage']
 			],
+			'cups_button' => [
+				'type' => 'checkbox',
+				'name' => 'cups_button',
+				'value' => $config['cups_button']
+			],
 			'previewFromCam' => [
 				'type' => 'checkbox',
 				'name' => 'previewFromCam',

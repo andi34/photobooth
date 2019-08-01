@@ -36,6 +36,7 @@ L10N = {
 	"file_format_date": "Utilice imágenes al formato fecha.",
 	"chroma_keying": "Active el croma verde.",
 	"keyingerror" : "¡La incrustación en el croma verde es imposible!",
+	"cups_button": "Mostrar el botón CUPS",
 	"use_print": "Utilizar la impresion",
 	"use_qr": "Utilizar los códigos QR",
 	"print_qrcode" : "Código QR en la imagen en proceso de impresión",

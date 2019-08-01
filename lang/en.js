@@ -36,6 +36,7 @@ L10N = {
 	"file_format_date": "Use dateformat images",
 	"chroma_keying": "Allow chroma keying",
 	"keyingerror" : "Chroma keying not possible!",
+	"cups_button": "Show CUPS button",
 	"use_print": "Use Print",
 	"use_qr": "Use QR Codes",
 	"print_qrcode" : "QR-Code on the picture while printing",

@@ -36,6 +36,7 @@ L10N = {
 	"file_format_date": "Utilisez images au format date",
 	"chroma_keying": "Activez le fond vert",
 	"keyingerror" : "L'incrustation sur fond vert n'est pas possible!",
+	"cups_button": "Afficher le bouton CUPS",
 	"use_print": "Utiliser l'impression",
 	"use_qr": "Utiliser les codes QR",
 	"print_qrcode" : "QR-Code sur l'image en cours d'impression",

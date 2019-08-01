@@ -78,6 +78,7 @@ require_once('db.php');
 				<?php if($config['use_collage']){ ?><a href="#" <?php if($config['use_gpio_button']){ ?>accesskey="m"<?php } ?> class="btn takeCollage"><i class="fa fa-camera"></i> <span data-l10n="takeCollage"></span></a><?php } ?>
 				<!-- accesskey to take a photo using alt+p (or use an external button)? -->
 				<a href="#" <?php if($config['use_gpio_button']){ ?>accesskey="p"<?php } ?> class="btn takePic"><i class="fa fa-camera"></i> <span data-l10n="takePhoto"></span></a>
+				<a class="btn" style="position:absolute;right:0;" href="http://<?php echo $_SERVER['HTTP_HOST'];?>:631/jobs/" target="newwin" onClick="window.open('','newwin','width=1024,height=600,left=0,top=0,screenX=0,screenY=0,resizable=NO,scrollbars=NO')"><span>Verwaltung</span></a>
 			</div>
 		</div>
 

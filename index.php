@@ -45,6 +45,7 @@ require_once('db.php');
 		var gallery_scrollbar = <?php echo ($config['scrollbar']) ? 'true' : 'false'; ?>;
  		var cntdwn_time = <?php echo ($config['cntdwn_time']); ?>;
 		var cheese_time = <?php echo ($config['cheese_time']); ?>;
+		var ir_trigger = <?php echo ($config['use_infrared_remote']); ?>;
 	</script>
 </head>
 <body class="deselect">

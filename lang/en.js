@@ -80,5 +80,6 @@ L10N = {
 	"wedding_symbol": "Symbol",
 	"symbol": "Choose a symbol",
 	"selectFilter": "Image filter",
-	"use_filter": "Allow image filter"
+	"use_filter": "Allow image filter",
+	"use_infrared_remote": "Use LIRC to take a Picture"
 }

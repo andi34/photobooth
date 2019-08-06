@@ -13,6 +13,7 @@ $config['use_qr'] = true;
 $config['use_mail'] = false; // mail data needs to be configured
 $config['use_mobile_view'] = false;
 $config['use_gpio_button'] = false; // Use alt+p to take a new picture, can be triggered via GPIO24
+$config['use_infrared_remote'] = false; // use Linux Infrared Remote Control (LIRC) to take a picture
 $config['show_fork'] = true;
 $config['previewFromCam'] = false; // experimental see https://github.com/andreknieriem/photobooth/pull/30
 $config['cups_button'] = false;

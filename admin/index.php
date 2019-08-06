@@ -67,6 +67,11 @@ if (file_exists($my_config)) {
 				'name' => 'use_gpio_button',
 				'value' => $config['use_gpio_button']
 			],
+			'use_infrared_remote' => [
+				'type' => 'checkbox',
+				'name' => 'use_infrared_remote',
+				'value' => $config['use_infrared_remote']
+			],
 			'show_fork' => [
 				'type' => 'checkbox',
 				'name' => 'show_fork',

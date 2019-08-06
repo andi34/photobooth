@@ -18,6 +18,7 @@ var photoBooth = (function () {
         resultPage = $('#result'),
         imgFilter = 'imgPlain',
         stream,
+        useIRTrigger = ir_trigger,
         webcamConstraints = {
             audio: false,
             video: {
@@ -138,6 +139,18 @@ var photoBooth = (function () {
                 $('.takePic').trigger('click');
             }
         });
+    });
+
+    // takePic using lirc-client
+    $(document).ready(function() {
+        if (useIRTrigger) {
+            const lirc = require('lirc-client')({
+                path: '/var/run/lirc/lircd'
+            });
+            lirc.on('receive', function (remote, button, repeat) {
+                $('.takePic').trigger('click');
+            });
+        }
     });
 
     // Show error Msg and reset

@@ -148,6 +148,7 @@ var photoBooth = (function () {
                 path: '/var/run/lirc/lircd'
             });
             lirc.on('receive', function (remote, button, repeat) {
+                console.log('button ' + button + ' on remote ' + remote + ' was pressed!');
                 $('.takePic').trigger('click');
             });
         }

@@ -14,7 +14,7 @@ $show_frontpage = true;
 if (isset($config['cookie_required']) && $config['cookie_required']) {
     $show_frontpage = false;
     if (isset($_COOKIE['take_images'])) {
-        if( strpos($_COOKIE['take_images'], $config['login_hash'] . '--') === 0) {
+        if( strpos($_COOKIE['take_images'],  md5($config['login_random1'].$config['login_username'])) === 0) {
             $show_frontpage = true;
         }
     }

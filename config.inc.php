@@ -49,16 +49,17 @@ $config['wedding']['symbol'] = 'fa-heart-o';
 // GALLERY
 // should the gallery list the newest pictures first?
 $config['show_gallery'] = true;
-$config['cookie_required'] = false; // If set to true only devices with the right cookie can access the front page  -> /admin/index.php
+$config['cookie_required'] = false; // If set to true only devices with the right cookie can access the front page -> /admin/index.php
 $config['newest_first'] = true;
 $config['scrollbar'] = false;
 $config['show_date'] = false; // only works if file_format_date = true
 $config['gallery']['date_format'] = 'd.m.Y - G:i';
 
 // LOGIN
+$config['login_enabled'] = false;
 $config['login_username'] = 'Photo';
-$config['login_password'] = 'booth';	
-$config['login_hash'] = md5('Q4KbXus?G'.$config['login_password'].'PjrOVUIx.bf'); // hash for login and cookie
+$config['login_password'] = 'booth';
+$config['login_random1'] = 'Q4KbXus?G'; // hash for login and cookie
 
 // EMAIL
 // If connection fails some help can be found here: https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting

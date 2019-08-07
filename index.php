@@ -9,6 +9,17 @@ if (file_exists($my_config)) {
 require_once('folders.php');
 require_once('db.php');
 
+// Check if frontpage is supposed to be visible
+$show_frontpage = true;
+if (isset($config['cookie_required']) && $config['cookie_required']) {
+    $show_frontpage = false;
+    if (isset($_COOKIE['take_images'])) {
+        if( strpos($_COOKIE['take_images'], $config['login_hash'] . '--') === 0) {
+            $show_frontpage = true;
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,6 +57,11 @@ require_once('db.php');
  		var cntdwn_time = <?php echo ($config['cntdwn_time']); ?>;
 		var cheese_time = <?php echo ($config['cheese_time']); ?>;
 		var ir_trigger = <?php echo ($config['use_infrared_remote']); ?>;
+		var show_frontpage = <?= $show_frontpage? 'true' : 'false'; ?>;
+		
+		<?php if( $show_frontpage === false ) : ?>
+		    window.onload = function() { $('#result .gallery, #start .gallery').click(); };
+		<?php endif; ?>
 	</script>
 </head>
 <body class="deselect">
@@ -56,7 +72,7 @@ require_once('db.php');
 			<?php if($config['show_gallery']){ ?><a class="gallery btn" href="#"><i class="fa fa-th"></i> <span data-l10n="gallery"></span></a><?php } ?>
 			<div class="blurred">
 			</div>
-			<div class="inner">
+			<div class="inner" <?= $show_frontpage ? '' : 'style="display: none"' ?>>
 				<?php
 				if($config['is_wedding']) {
 					echo '<div class="names"><hr class="small" /><hr><div><h1>'. $config['wedding']['groom'] . ' <i class="fa '. $config['wedding']['symbol'] .' "aria-hidden="true"></i> ' . $config['wedding']['bride'] . '<br>' . $config['start_screen_title'] . '</h1><h2>' . $config['start_screen_subtitle'] . '</h2></div><hr><hr class="small" /></div>';
@@ -140,7 +156,7 @@ require_once('db.php');
 			<div class="galInner">
 				<div class="galHeader">
 					<h1><span data-l10n="gallery"></span></h1>
-					<a href="#" class="close_gal"><i class="fa fa-times"></i></a>
+					<a href="#" class="close_gal" <?= $show_frontpage ? '' : 'style="display: none"' ?>><i class="fa fa-times"></i></a>
 				</div>
 				<div class="images" id="galimages">
 					<?php

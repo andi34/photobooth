@@ -49,15 +49,13 @@ $config['wedding']['symbol'] = 'fa-heart-o';
 // GALLERY
 // should the gallery list the newest pictures first?
 $config['show_gallery'] = true;
+$config['cookie_required'] = false; // If set to true only devices with the right cookie can access the front page  -> /admin/index.php
 $config['newest_first'] = true;
 $config['scrollbar'] = false;
 $config['show_date'] = false; // only works if file_format_date = true
 $config['gallery']['date_format'] = 'd.m.Y - G:i';
 
-// COOKIE
-// If set to true only devices with the right cookie can access the front page
-// to set the cookie visit /admin/index.php and log in with the username and password
-$config['cookie_required'] = false;
+// LOGIN
 $config['login_username'] = 'Photo';
 $config['login_password'] = 'booth';	
 $config['login_hash'] = md5('Q4KbXus?G'.$config['login_password'].'PjrOVUIx.bf'); // hash for login and cookie

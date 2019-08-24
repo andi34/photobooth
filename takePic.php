@@ -139,6 +139,7 @@ if($_POST['style'] === 'photo') {
 	$my_collage_height = $height * 2;
 	$my_collage_width = $width * 2;
 	$my_collage = imagecreatetruecolor($my_collage_width,$my_collage_height)
+        	      or die("Kann keinen neuen GD-Bild-Stream erzeugen");
 	$background = imagecolorallocate( $my_collage, 0, 0, 0);
 	imagecolortransparent($my_collage, $background);
 	$collage_pic1 = imagecreatefromjpeg($collagePhoto[0]) or die("no imagcreate");

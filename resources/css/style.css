@@ -855,3 +855,11 @@ hr.small {
     bottom: auto;
   }
 }
+.swal2-container {
+  z-index: 20000;
+  -webkit-overflow-scrolling: auto
+}
+.myPrintConfirmation .swal2-icon {
+ border-color: orange;
+}
+

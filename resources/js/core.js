@@ -185,7 +185,15 @@ var photoBooth = (function () {
         // Add Print Link
         $(document).off('click touchstart', '.printbtn');
         $(document).on('click', '.printbtn', function (e) {
-            e.preventDefault();
+            swal({
+		customClass: 'myPrintConfirmation',
+		type: 'success',
+		title: 'Druckauftrag gestartet',
+		showConfirmButton: false,
+		timer: 1600,
+		allowOutsideClick: false
+		})
+	    e.preventDefault();
             $.ajax({
                 url: 'print.php?filename=' + encodeURI(result.img),
             }).done(function (data) {
@@ -431,7 +439,15 @@ var photoBooth = (function () {
     });
     // print in gallery
     $(document).on('click touchstart', '.gal-print', function (e) {
-        e.preventDefault();
+        swal({
+		customClass: 'myPrintConfirmation',
+		type: 'success',
+		title: 'Druckauftrag gestartet',
+		showConfirmButton: false,
+		timer: 1600,
+		allowOutsideClick: false
+	})
+	e.preventDefault();
         var img = pswp.currItem.src;
         img = img.replace(imgFolder+'/', '');
         $.ajax({

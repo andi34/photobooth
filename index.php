@@ -10,6 +10,10 @@ require_once('folders.php');
 require_once('db.php');
 
 ?>
+
+<script src="resources/js/sweetalert2.all.min.js">
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -198,7 +198,10 @@ var photoBooth = (function () {
                 url: 'print.php?filename=' + encodeURI(result.img),
             }).done(function (data) {
             })
-        });
+	   setTimeout(function () {  
+          	window.location = window.location.origin;
+           }, 850); 
+	});
 
         // Add Image to gallery and slider
         public.addImage(result.img);
@@ -454,7 +457,8 @@ var photoBooth = (function () {
             url: 'print.php?filename=' + encodeURI(img),
         }).done(function (data) {
         })
-    });
+    	pswp.close();
+     });
 
     // chroma keying print
     $(document).on('click touchstart', '.gal-print-chroma_keying', function (e) {
@@ -580,7 +584,7 @@ var photoBooth = (function () {
 
         // Go to Home
         if (target.hasClass('homebtn') || target.closest('.homebtn').length > 0) {
-            window.location = window.location.origin;
+	   window.location = window.location.origin;
         }
 
         // Qr in and out

@@ -188,7 +188,7 @@ var photoBooth = (function () {
             swal({
 		customClass: 'myPrintConfirmation',
 		type: 'success',
-		title: 'Druckauftrag gestartet',
+		title: L10N.printing,
 		showConfirmButton: false,
 		timer: 1600,
 		allowOutsideClick: false
@@ -445,7 +445,7 @@ var photoBooth = (function () {
         swal({
 		customClass: 'myPrintConfirmation',
 		type: 'success',
-		title: 'Druckauftrag gestartet',
+		title: L10N.printing,
 		showConfirmButton: false,
 		timer: 1600,
 		allowOutsideClick: false

@@ -20,6 +20,7 @@ L10N = {
 	"error": "Il y a eu un problème. Merci de réessayer",
 	"reload": "Recharger la page",
 	"print": "Imprimer",
+	"printing": "Imprimer commencé",
 	"save":"Sauvegarder",
 	"saving":"En cours de sauvegarde",
 	"success":"Enregistré avec succès",

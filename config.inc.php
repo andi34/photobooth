@@ -28,6 +28,9 @@ $config['chroma_keying'] = true;
 $config['use_collage'] = false;
 $config['bluegray_theme'] = false;
 
+
+$config['trigger_button'] = 'html';
+
 // LANGUAGE
 // possible values: en, de, es, fr
 $config['language'] = 'de';

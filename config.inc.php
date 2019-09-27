@@ -10,24 +10,83 @@ $sys['os'] = (DIRECTORY_SEPARATOR == '\\') || (strtolower(substr(PHP_OS, 0, 3)) 
 $config['dev'] = false;
 $config['use_print'] = false;
 $config['use_qr'] = true;
+$config['use_mail'] = false; // mail data needs to be configured
+$config['use_mobile_view'] = false;
+$config['use_gpio_button'] = false; // Use alt+p to take a new picture, can be triggered via GPIO24
 $config['show_fork'] = true;
 $config['previewFromCam'] = false; // experimental see https://github.com/andreknieriem/photobooth/pull/30
-#$config['file_format'] = 'date'; // comment in to get dateformat images
-
-// FOLDERS
-// change the folders to whatever you like
-$config['folders']['images'] = 'images';
-$config['folders']['thumbs'] = 'thumbs';
-$config['folders']['qrcodes'] = 'qrcodes';
-$config['folders']['print'] = 'print';
-
-// GALLERY
-// should the gallery list the newest pictures first?
-$config['gallery']['newest_first'] = true;
+$config['cups_button'] = false;
+$config['file_format_date'] = false;
+$config['cntdwn_time'] = '5'; // control countdown timer
+$config['cheese_time'] = '1000'; // control time for cheeeeese!
+$config['use_filter'] = true;
+$config['chroma_keying'] = true;
 
 // LANGUAGE
 // possible values: en, de, fr
 $config['language'] = 'de';
+
+// StartScreen
+$config['start_screen_title'] = 'Photobooth';
+$config['start_screen_subtitle'] = 'Webinterface by André Rinas';
+
+// FOLDERS
+// change the folders to whatever you like
+$config['folders']['images'] = 'images';
+$config['folders']['keying'] = 'keying';
+$config['folders']['print'] = 'print';
+$config['folders']['qrcodes'] = 'qrcodes';
+$config['folders']['thumbs'] = 'thumbs';
+$config['folders']['tmp'] = 'tmp';
+
+// WEDDING SETTINGS
+$config['is_wedding'] = false;
+$config['wedding']['groom'] = 'Name 1';
+$config['wedding']['bride'] = 'Name 2';
+$config['wedding']['symbol'] = 'fa-heart-o';
+
+// GALLERY
+// should the gallery list the newest pictures first?
+$config['show_gallery'] = true;
+$config['cookie_required'] = false; // If set to true only devices with the right cookie can access the front page -> /admin/index.php
+$config['newest_first'] = true;
+$config['scrollbar'] = false;
+$config['show_date'] = false; // only works if file_format_date = true
+$config['gallery']['date_format'] = 'd.m.Y - G:i';
+
+// LOGIN
+$config['login_enabled'] = false;
+$config['login_username'] = 'Photo';
+$config['login_password'] = 'booth';
+$config['login_random1'] = 'Q4KbXus?G'; // hash for login and cookie
+
+// EMAIL
+// If connection fails some help can be found here: https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting
+// Especially gmail needs some special config
+$config['send_all_later'] = false; // if true enables checkbox to save the current mail address for later in mail-addresses.txt
+$config['mail_host'] = 'smtp.example.com';
+$config['mail_username'] = 'photobooth@example.com';
+$config['mail_password'] = 'yourpassword';
+$config['mail_secure'] = 'tls';
+$config['mail_port'] = '587';
+$config['mail_fromAddress'] = 'photobooth@example.com';
+$config['mail_fromName'] = 'Photobooth';
+
+switch($config['language']) {
+	case 'de':
+	$config['mail_subject'] = 'Hier ist dein Bild';
+	$config['mail_text'] = 'Hey, dein Bild ist angehangen.';
+	break;
+	case 'fr':
+	$config['mail_subject'] = 'Voici votre photo';
+	$config['mail_text'] = 'Hé, ta photo est attachée.';
+	break;
+	case 'en':
+	default:
+	$config['mail_subject'] = 'Here is your picture';
+	$config['mail_text'] = 'Hey, your picture is attached.';
+	break;
+}
 
 // COMMANDS and MESSAGES
 switch($sys['os']) {

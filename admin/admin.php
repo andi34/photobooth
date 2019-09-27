@@ -2,7 +2,12 @@
 
 $data = $_POST;
 if(isset($data['type'])){
-  require_once('../config.inc.php');
+  $my_config = '../my.config.inc.php';
+  if (file_exists($my_config)) {
+    require_once('../my.config.inc.php');
+  } else {
+    require_once('../config.inc.php');
+  }
 
   if($data['type'] == 'reset') {
 
@@ -32,6 +37,21 @@ if(isset($data['type'])){
 
     if(!file_exists($file)) {
       fopen($file, 'w');
+    }
+
+    if(isset($data['gallery']['cookie_isset'])) {
+        $username = $data['login']['login_username'];
+
+        $random1 = $data['login']['login_random1'];
+
+        $hash = md5($random1.$username);
+
+        if ($data['gallery']['cookie_isset'] == 'true') {
+            $time = time() + (86400 * 30);
+            setcookie('take_images', $hash, $time, "/"); // 86400 = 1 day => 30 days
+        } elseif ($data['gallery']['cookie_isset'] == 'false') {
+            setcookie('take_images', $hash, 0, "/"); // should delete it
+        }
     }
 
     foreach($config as $k=>$conf){

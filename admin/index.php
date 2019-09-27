@@ -1,6 +1,32 @@
 <?php
+session_start();
 
-require_once('../config.inc.php');
+$my_config = '../my.config.inc.php';
+if (file_exists($my_config)) {
+	require_once('../my.config.inc.php');
+} else {
+	require_once('../config.inc.php');
+}
+
+// LOGIN
+$username = $config['login_username'];
+$password = $config['login_password'];
+$random1 = $config['login_random1'];
+$hash = md5($random1.$username);
+$error = false;
+
+if (isset($_POST['submit'])) {
+    if (isset($_POST['username']) && $_POST['username'] == $username && isset($_POST['password']) && $_POST['password'] == $password) {
+        //IF USERNAME AND PASSWORD ARE CORRECT SET THE LOG-IN SESSION
+        $_SESSION["login"] = $hash;
+        header("Location: $_SERVER[PHP_SELF]");
+        exit;
+    } else {
+        // DISPLAY FORM WITH ERROR
+        $error = '<p>Username or password is invalid</p>';
+    }
+}
+// END LOGIN
 
 	$configsetup = [
 		'general' => [
@@ -13,14 +39,29 @@ require_once('../config.inc.php');
 					'fr' => 'FR',
 					'en' => 'EN'
 				],
-				'name' => 'language',
 				'value' => $config['language']
+			],
+			'start_screen_title' => [
+				'type' => 'input',
+				'placeholder' => 'Photobooth',
+				'name' => 'start_screen_title',
+				'value' => $config['start_screen_title']
+			],
+			'start_screen_subtitle' => [
+				'type' => 'input',
+				'placeholder' => 'Webinterface by André Rinas',
+				'name' => 'start_screen_subtitle',
+				'value' => $config['start_screen_subtitle']
 			],
 			'dev' => [
 				'type' => 'checkbox',
 				'name' => 'dev',
-				'name' => 'dev',
 				'value' => $config['dev']
+			],
+			'file_format_date' => [
+				'type' => 'checkbox',
+				'name' => 'file_format_date',
+				'value' => $config['file_format_date']
 			],
 			'use_print' => [
 				'type' => 'checkbox',
@@ -32,10 +73,52 @@ require_once('../config.inc.php');
 				'name' => 'use_qr',
 				'value' => $config['use_qr']
 			],
+			'use_mail' => [
+				'type' => 'checkbox',
+				'name' => 'use_mail',
+				'value' => $config['use_mail']
+			],
+			'use_mobile_view' => [
+				'type' => 'checkbox',
+				'name' => 'use_mobile_view',
+				'value' => $config['use_mobile_view']
+			],
+			'use_gpio_button' => [
+				'type' => 'checkbox',
+				'name' => 'use_gpio_button',
+				'value' => $config['use_gpio_button']
+			],
 			'show_fork' => [
 				'type' => 'checkbox',
 				'name' => 'show_fork',
 				'value' => $config['show_fork']
+			],
+			'cntdwn_time' => [
+				'type' => 'input',
+				'name' => 'cntdwn_time',
+				'placeholder' => '5',
+				'value' => $config['cntdwn_time']
+			],
+			'cheese_time' => [
+				'type' => 'input',
+				'placeholder' => '1000',
+				'name' => 'cheese_time',
+				'value' => $config['cheese_time']
+			],
+			'use_filter' => [
+				'type' => 'checkbox',
+				'name' => 'use_filter',
+				'value' => $config['use_filter']
+			],
+			'chroma_keying' => [
+				'type' => 'checkbox',
+				'name' => 'chroma_keying',
+				'value' => $config['chroma_keying']
+			],
+			'cups_button' => [
+				'type' => 'checkbox',
+				'name' => 'cups_button',
+				'value' => $config['cups_button']
 			],
 			'previewFromCam' => [
 				'type' => 'checkbox',
@@ -50,11 +133,17 @@ require_once('../config.inc.php');
 				'name' => 'folders[images]',
 				'value' => $config['folders']['images']
 			],
-			'thumbs' => [
+			'keying' => [
 				'type' => 'input',
-				'placeholder' => 'thumbs',
-				'name' => 'folders[thumbs]',
-				'value' => $config['folders']['thumbs']
+				'placeholder' => 'keying',
+				'name' => 'folders[keying]',
+				'value' => $config['folders']['keying']
+			],
+			'print' => [
+				'type' => 'input',
+				'placeholder' => 'print',
+				'name' => 'folders[print]',
+				'value' => $config['folders']['print']
 			],
 			'qrcodes' => [
 				'type' => 'input',
@@ -62,19 +151,175 @@ require_once('../config.inc.php');
 				'name' => 'folders[qrcodes]',
 				'value' => $config['folders']['qrcodes']
 			],
-			'print' => [
+			'thumbs' => [
 				'type' => 'input',
-				'placeholder' => 'print',
-				'name' => 'folders[print]',
-				'value' => $config['folders']['print']
+				'placeholder' => 'thumbs',
+				'name' => 'folders[thumbs]',
+				'value' => $config['folders']['thumbs']
+			],
+			'tmp' => [
+				'type' => 'input',
+				'placeholder' => 'tmp',
+				'name' => 'folders[tmp]',
+				'value' => $config['folders']['tmp']
+			]
+		],
+		'wedding' => [
+			'is_wedding' => [
+				'type' => 'checkbox',
+				'name' => 'is_wedding',
+				'value' => $config['is_wedding']
+			],
+			'groom' => [
+				'type' => 'input',
+				'placeholder' => 'Name 1',
+				'name' => 'wedding[groom]',
+				'value' => $config['wedding']['groom']
+			],
+			'bride' => [
+				'type' => 'input',
+				'placeholder' => 'Name 2',
+				'name' => 'wedding[bride]',
+				'value' => $config['wedding']['bride']
+			],
+			'symbol' => [
+				'type' => 'select',
+				'name' => 'wedding[symbol]',
+				'placeholder' => 'wedding[symbol]',
+				'options' => [
+					'fa-heart-o' => 'Heart',
+					'fa-heart' => 'Heart filled',
+					'fa-heartbeat' => 'Heartbeat',
+					'fa-anchor' => 'Anchor',
+					'fa-glass' => 'Glass'
+				],
+				'value' => $config['wedding']['symbol']
 			]
 		],
 		'gallery' => [
+			'show_gallery' => [
+				'type' => 'checkbox',
+				'name' => 'show_gallery',
+				'value' => $config['show_gallery']
+			],
+			'cookie_required' => [
+				'type' => 'checkbox',
+				'name' => 'cookie_required',
+				'value' => $config['cookie_required']
+			],
+			// Cookie is set on current device?
+			'cookie_isset' => [
+				'type' => 'checkbox',
+				'name' => 'cookie_set_device',
+				'value' => isset($_COOKIE['take_images']) && strpos($_COOKIE['take_images'], md5($config['login_random1'].$config['login_password']) . '--') === 0,
+			],
 			'newest_first' => [
 				'type' => 'checkbox',
 				'name' => 'newest_first',
-				'value' => 1
+				'value' => $config['newest_first']
+			],
+			'scrollbar' => [
+				'type' => 'checkbox',
+				'name' => 'scrollbar',
+				'value' => $config['scrollbar']
+			],
+			'show_date' => [
+				'type' => 'checkbox',
+				'name' => 'show_date',
+				'value' => $config['show_date']
+			],
+			'date_format' => [
+				'type' => 'input',
+				'placeholder' => 'd.m.Y - G:i',
+				'name' => 'gallery[date_format]',
+				'value' => $config['gallery']['date_format']
 			]
+		],
+		'login' => [
+			'login_enabled' => [
+				'type' => 'checkbox',
+				'name' => 'login_enabled',
+				'value' => $config['login_enabled']
+			],
+			'login_username' => [
+				'type' => 'input',
+				'placeholder' => 'Photo',
+				'name' => 'login_username',
+				'value' => $config['login_username']
+			],
+			'login_password' => [
+				'type' => 'input',
+				'placeholder' => 'booth',
+				'name' => 'login_password',
+				'value' => $config['login_password']
+			],
+			'login_random1' => [
+				'type' => 'input',
+				'placeholder' => 'Q4KbXus?G',
+				'name' => 'login_random1',
+				'value' => $config['login_random1']
+			],
+		],
+		'mail' => [
+			'send_all_later' => [
+				'type' => 'checkbox',
+				'name' => 'send_all_later',
+				'value' => $config['send_all_later']
+			],
+			'host' => [
+				'type' => 'input',
+				'placeholder' => 'smtp.example.com',
+				'name' => 'mail_host',
+				'value' => $config['mail_host']
+			],
+			'username' => [
+				'type' => 'input',
+				'placeholder' => 'photobooth@example.com',
+				'name' => 'mail_username',
+				'value' => $config['mail_username']
+			],
+			'password' => [
+				'type' => 'input',
+				'placeholder' => 'yourpassword',
+				'name' => 'mail_password',
+				'value' => $config['mail_password']
+			],
+			'secure' => [
+				'type' => 'input',
+				'placeholder' => 'tls',
+				'name' => 'mail_secure',
+				'value' => $config['mail_secure']
+			],
+			'port' => [
+				'type' => 'input',
+				'placeholder' => '587',
+				'name' => 'mail_port',
+				'value' => $config['mail_port']
+			],
+			'fromAddress' => [
+				'type' => 'input',
+				'placeholder' => 'photobooth@example.com',
+				'name' => 'mail_fromAddress',
+				'value' => $config['mail_fromAddress']
+			],
+			'fromName' => [
+				'type' => 'input',
+				'placeholder' => 'Photobooth',
+				'name' => 'mail_fromName',
+				'value' => $config['mail_fromName']
+			],
+			'subject' => [
+				'type' => 'input',
+				'placeholder' => 'Here is your picture',
+				'name' => 'mail_subject',
+				'value' => $config['mail_subject']
+			],
+			'text' => [
+				'type' => 'input',
+				'placeholder' => 'Hey, your picture is attached.',
+				'name' => 'mail_text',
+				'value' => $config['mail_text']
+			],
 		],
 		'commands' => [
 			'take_picture_cmd' => [
@@ -104,10 +349,11 @@ require_once('../config.inc.php');
 		]
 	];
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+	<?php if($config['use_mobile_view']){ ?><meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no"><?php } ?>
 	<title>Photobooth</title>
 
 	<!-- Favicon + Android/iPhone Icons -->
@@ -125,14 +371,15 @@ require_once('../config.inc.php');
 	<link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
 	<link rel="stylesheet" href="/resources/css/admin.css" />
 	<script type="text/javascript">
-		var isdev = true;
-		var gallery_newest_first = <?php echo ($config['gallery']['newest_first']) ? 'true' : 'false'; ?>;
+		var isdev = <?php echo ($config['dev']) ? 'true' : 'false'; ?>;
+		var gallery_newest_first = <?php echo ($config['newest_first']) ? 'true' : 'false'; ?>;
 	</script>
 </head>
 <body class="deselect">
 <div id="admin-settings">
 	<div class="admin-panel">
-		<h2><a class="back-to-pb" href="/">Photobooth</a></h2>
+                <h2><a class="back-to-pb" href="/">Photobooth</a></h2>
+                <?php if( !$config['login_enabled'] || (isset($_SESSION['login']) && $_SESSION['login'] == $hash)): ?>
 		<button class="reset-btn">
 			<span class="save">
 				<span data-l10n="reset"></span>
@@ -216,10 +463,22 @@ require_once('../config.inc.php');
 				</span>
 			</button>
 		</div>
+                <?php else: ?>
+                <form method='post' class="login">
+                    <label for="username">username</label>
+                    <input type="text" name="username" id="username">
+                    <label for="password">password</label>
+                    <input type="password" name="password" id="password">
+                    <input type="submit" name="submit" value="submit">
+                    <?php if ($error !== false) {
+                        echo $error;
+                    } ?>
+                </form>
+                <?php endif; ?>
 	</div>
 
 </div>
-<script type="text/javascript" src="/resources/js/jquery.js"></script>
+<script type="text/javascript" src="/resources/js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="/resources/js/l10n.js"></script>
 <script type="text/javascript" src="/resources/js/admin.js"></script>
 <script type="text/javascript" src="/lang/<?php echo $config['language']; ?>.js"></script>

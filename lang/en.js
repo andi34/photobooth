@@ -35,6 +35,8 @@ L10N = {
 	"use_print": "Use Print",
 	"use_qr": "Use QR Codes",
 	"show_gallery": "Show Gallery",
+    "cookie_required" : "Cookie is required to view the front page. On devices without it the gallery is shown directly",
+    "cookie_isset" : 'Cookie is set on this device (check to enable taking pictures, uncheck to remove)',
 	"scrollbar": "Show scrollbar in Gallery",
 	"show_date": "Show date below images in Gallery (only works if dateformat images is used)",
 	"gallery_date_format": "Date style",

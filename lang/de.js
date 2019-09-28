@@ -35,6 +35,8 @@ L10N = {
 	"use_print": "Drucken aktivieren",
 	"use_qr": "QR-Code aktivieren",
 	"show_gallery": "Galerie aktivieren",
+	"cookie_required" : "Cookie wird benötigt um die Startseite zu sehen. Ohne Cookie wird direkt die Gallerie angezeigt",
+	"cookie_isset" : 'Cookie auf diesem Gerät gesetzt (Haken entfernen und speichern um Cookie zu entfernen)',
 	"scrollbar": "Scrollbar in Galerie aktivieren",
 	"show_date": "Datum in Galerie unter dem Foto anzeigen (funktioniert nur wenn Bilder mit Datum benannt werden)",
 	"gallery_date_format": "Datumsstil",

@@ -39,19 +39,20 @@ if(isset($data['type'])){
       fopen($file, 'w');
     }
 
-    if(isset($data['gallery']['cookie_isset'])) {
-        $username = $data['login']['login_username'];
+    $username = $data['login_username'];
 
-        $random1 = $data['login']['login_random1'];
+    $random1 = $data['login_random1'];
 
-        $hash = md5($random1.$username);
+    $hash = md5($random1.$username);
 
-        if ($data['gallery']['cookie_isset'] == 'true') {
+    if(isset($data['cookie_set_device'])) {
+        if ($data['cookie_set_device'] == 'true') {
             $time = time() + (86400 * 30);
             setcookie('take_images', $hash, $time, "/"); // 86400 = 1 day => 30 days
-        } elseif ($data['gallery']['cookie_isset'] == 'false') {
-            setcookie('take_images', $hash, 0, "/"); // should delete it
         }
+    } elseif ( isset( $_COOKIE['take_images'] ) ) {
+        unset($_COOKIE['take_images']);
+        setcookie('take_images', $hash, time() - 3600, "/"); // should delete it
     }
 
     foreach($config as $k=>$conf){

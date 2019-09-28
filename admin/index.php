@@ -211,7 +211,7 @@ if (isset($_POST['submit'])) {
 			'cookie_isset' => [
 				'type' => 'checkbox',
 				'name' => 'cookie_set_device',
-				'value' => isset($_COOKIE['take_images']) && strpos($_COOKIE['take_images'], md5($config['login_random1'].$config['login_password']) . '--') === 0,
+				'value' => isset($_COOKIE['take_images']) && strpos($_COOKIE['take_images'], md5($config['login_random1'].$config['login_username'])) === 0,
 			],
 			'newest_first' => [
 				'type' => 'checkbox',

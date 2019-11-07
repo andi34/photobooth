@@ -73,7 +73,7 @@ cd /var/www/
 rm -rf html
 mkdir html
 
-echo -e "\033[0;33m### Do you like to install from git? This will take more"
+echo -e "\033[0;33m### Do you like to install my fork from git? This will take more"
 read -p "### time and is recommended only for brave users. [y/N] " -n 1 -r
 echo -e "\033[0m"
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -90,11 +90,8 @@ then
     apt install -y yarn
 
     info "### Now we are going to install Photobooth."
-    git clone https://github.com/andreknieriem/photobooth html
+    git clone https://github.com/andi34/photobooth html
     cd /var/www/html
-    LATEST_VERSION=$( git describe --tags `git rev-list --tags --max-count=1` )
-    info "### We ar installing version $LATEST_VERSION".
-    git checkout $LATEST_VERSION
     git submodule update --init
 
     info "### Get yourself a hot beverage. The following step can take up to 15 minutes."

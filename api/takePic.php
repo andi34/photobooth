@@ -1,4 +1,5 @@
 <?php
+$time_start = microtime(true);
 header('Content-Type: application/json');
 
 require_once('../lib/config.php');
@@ -93,4 +94,5 @@ if ($_POST['style'] === 'photo') {
 echo json_encode([
     'success' => 'image',
     'file' => $file,
+    'time' => microtime(true) - $time_start,
 ]);

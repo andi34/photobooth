@@ -41,7 +41,7 @@
                 <button class="pswp__button pswp__button--qrcode" title="QR Code"><i class="fa fa-qrcode"></i></button>
                 <?php endif; ?>
 
-                <?php if ($config['use_download']): ?>
+                <?php if ($config['use_download'] && $_SERVER['REMOTE_ADDR'] !== $_SERVER['SERVER_ADDR']): ?>
                 <button class="pswp__button pswp__button--download" title="Download"><i class="fa fa-download"></i></button>
                 <?php endif; ?>
 

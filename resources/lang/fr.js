@@ -1,5 +1,6 @@
 /* exported L10N */
 const L10N = {
+    'nextPicture': 'Photo suivante',
     'send': 'Envoyer',
     'show_error_messages': 'Afficher les messages d\'erreur',
     'general_default_imagefilter': 'Filtre d\'image par défaut',

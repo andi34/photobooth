@@ -1,6 +1,6 @@
 /* exported L10N */
 const L10N = {
-    'nextPicture': 'Επόμενη εικόνα',
+    'nextPhoto': 'Επόμενη εικόνα',
     'send': 'στείλετε',
     'show_error_messages': 'Εμφάνιση μηνυμάτων σφάλματος',
     'general_default_imagefilter': 'Προεπιλεγμένο φίλτρο εικόνας',

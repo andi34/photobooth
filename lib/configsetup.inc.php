@@ -449,6 +449,12 @@ $configsetup = [
 			'placeholder' => '60',
 			'name' => 'slideshow_refresh_time',
 			'value' => $config['slideshow_refresh_time']
+		],
+		'pictureTime' => [
+			'type' => 'input',
+			'placeholder' => '3000',
+			'name' => 'slideshow_pictureTime',
+			'value' => $config['slideshow_pictureTime']
 		]
 	],
 	'commands' => [

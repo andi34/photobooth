@@ -453,6 +453,25 @@ $configsetup = [
 			'value' => $config['mail_text']
 		],
 	],
+	'slideshow' => [
+		'refresh_time' => [
+			'type' => 'input',
+			'placeholder' => '60',
+			'name' => 'slideshow_refresh_time',
+			'value' => $config['slideshow_refresh_time']
+		],
+		'pictureTime' => [
+			'type' => 'input',
+			'placeholder' => '3000',
+			'name' => 'slideshow_pictureTime',
+			'value' => $config['slideshow_pictureTime']
+		],
+		'randomPicture' => [
+			'type' => 'checkbox',
+			'name' => 'slideshow_randomPicture',
+			'value' => $config['slideshow_randomPicture']
+		]
+	],
 	'commands' => [
 		'take_picture_cmd' => [
 			'type' => 'input',

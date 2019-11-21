@@ -1,0 +1,20 @@
+#slideshow {
+  margin: 0px auto;
+  position: relative;
+
+  img {
+    border:2px solid black;
+  }
+}
+
+#slideshow > div {
+  position: absolute;
+}
+
+.center {
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}

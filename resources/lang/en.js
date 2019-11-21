@@ -129,5 +129,9 @@ const L10N = {
     'jpeg_quality_jpeg_quality_image': 'JPEG quality for images (-1 ... 100)',
     'jpeg_quality_jpeg_quality_chroma': 'JPEG quality for chroma-keying (-1 ... 100)',
     'jpeg_quality_jpeg_quality_thumb': 'JPEG quality for thumbnails (-1 ... 100)',
-    'abort': 'Abort'
+    'abort': 'Abort',
+    'slideshow': 'Slideshow',
+    'slideshow_refresh_time': 'Refresh page afert X seconds',
+    'slideshow_pictureTime': 'Milliseconds an image is displayed',
+    'randomPicture': 'Show random pictures'
 }

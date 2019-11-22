@@ -20,6 +20,10 @@
   background-image: $backgroundImage;
   background-position: center center;
   background-size: cover;
+
+  &.adminbg {
+    background-image: $adminBackground;
+  }
 }
 
 .adminpanel {
@@ -220,7 +224,7 @@ hr.small {
   color: #fff;
   width: 100%;
   height: 250px;
-  background: $adminBackground center center no-repeat;
+  background: $backgroundImage center center no-repeat;
   background-size: cover;
   -webkit-filter: blur(6px);
   -moz-filter: blur(6px);

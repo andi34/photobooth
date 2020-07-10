@@ -11,6 +11,11 @@ $cmds = [
             'cmd' => 'digicamcontrol\CameraControlCmd.exe /capture /filename %s',
             'msg' => 'Photo transfer done.'
         ],
+        // TODO
+        'start_preview' => [
+            'cmd' => '',
+            'msg' => 'Not possible on Windows yet'
+        ],
         'print' => [
             'cmd' => 'mspaint /pt %s',
             'msg' => '',
@@ -24,6 +29,10 @@ $cmds = [
         'take_picture' => [
             'cmd' => 'gphoto2 --capture-image-and-download --filename=%s',
             'msg' => 'New file is in location'
+        ],
+        'start_preview' => [
+            'cmd' => 'gphoto2 --capture-movie=3s --stdout | ffmpeg -re -i pipe:0 -listen 1 -s 960x640 -f mjpeg http://localhost:8090',
+            'msg' => 'Video preview has been launched'
         ],
         'print' => [
             'cmd' => 'lp -o landscape -o fit-to-page %s',
@@ -61,6 +70,8 @@ $config['mail_subject'] = $mailTemplates[$config['language']]['mail_subject'];
 $config['mail_text'] = $mailTemplates[$config['language']]['mail_text'];
 $config['take_picture']['cmd'] = $cmds[$os]['take_picture']['cmd'];
 $config['take_picture']['msg'] = $cmds[$os]['take_picture']['msg'];
+$config['start_preview']['cmd'] = $cmds[$os]['start_preview']['cmd'];
+$config['start_preview']['msg'] = $cmds[$os]['start_preview']['msg'];
 $config['print']['cmd'] = $cmds[$os]['print']['cmd'];
 $config['print']['msg'] = $cmds[$os]['print']['msg'];
 $config['exiftool']['cmd'] = $cmds[$os]['exiftool']['cmd'];

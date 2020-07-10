@@ -339,7 +339,7 @@ $configsetup = [
 		'background_image' => [
 			'type' => 'input',
 			'name' => 'background_image',
-			'placeholder' => 'url(../img/bg.jpg)',
+			'placeholder' => 'url(http://localhost:8090/)',
 			'value' => $config['background_image']
 		],
 		'background_admin' => [

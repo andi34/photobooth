@@ -40,7 +40,7 @@ $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $imag
 	<?php endif; ?>
 	<?php if ($config['rounded_corners']): ?>
 	<link rel="stylesheet" href="resources/css/rounded.css" />
-	<?php endif; ?>
+	<?php endif; ?>Preview
 </head>
 
 <video id="video--preview" autoplay playsinline></video>
@@ -136,7 +136,7 @@ $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $imag
 				<video id="video--view" autoplay playsinline></video>
 
 				<div id="counter">
-					<canvas id="video--sensor"</canvas>
+					<canvas id="video--sensor"></canvas>
 				</div>
 				<div class="cheese"></div>
 				<div class="loading"></div>

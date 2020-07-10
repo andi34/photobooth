@@ -32,8 +32,8 @@ function takePicture($filename)
     } else {
         $dir = dirname($filename);
         chdir($dir); //gphoto must be executed in a dir with write permission
-        $cmd = sprintf($config['take_picture']['cmd'], $filename);
 
+        $cmd = sprintf($config['take_picture']['cmd'], $filename);
         exec($cmd, $output, $returnValue);
 
         if ($returnValue) {

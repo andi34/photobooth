@@ -124,13 +124,13 @@ const photoBooth = (function () {
         //img.src = "url(http://localhost:8090/video-stream.mjpeg)"
         img.src = config.background_image;
 
-        Photobooth.previewVideoPlayer = Window.setInterval(function () {
+        Photobooth.previewVideoPlayer = window.setInterval(function () {
             ctx.drawImage(img, 0, 0);
         }, 10);
     }
 
     Photobooth.stopRemotePreview = function () {
-        Window.clearInterval(Photobooth.previewVideoPlayer);
+        window.clearInterval(Photobooth.previewVideoPlayer);
     }
 
     Photobooth.startVideo = function (mode) {

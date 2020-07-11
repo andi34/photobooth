@@ -753,7 +753,7 @@ const photoBooth = (function () {
         });
     }
 
-    return public;
+    return Photobooth;
 })();
 
 // Init on domready

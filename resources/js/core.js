@@ -127,7 +127,7 @@ const photoBooth = (function () {
         Photobooth.previewVideoPlayer = window.setInterval(function () {
             console.log("Updating Image")
             ctx.drawImage(img, 0, 0, 800, 600, 0, 0, 800, 600);
-        }, 10);
+        }, 100);
     }
 
     Photobooth.stopRemotePreview = function () {

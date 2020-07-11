@@ -208,9 +208,9 @@ const photoBooth = (function () {
         }
 
         loader.addClass('open');
-        Photobooth.startCountdown(nextCollageNumber ? config.collage_cntdwn_time : config.cntdwn_time, $('#counter'), () => {
-            Photobooth.cheese(photoStyle);
-        });
+        //Photobooth.startCountdown(nextCollageNumber ? config.collage_cntdwn_time : config.cntdwn_time, $('#counter'), () => {
+        //    Photobooth.cheese(photoStyle);
+        //});
     }
 
     // Cheese
@@ -257,7 +257,7 @@ const photoBooth = (function () {
             if (config.previewCamTakesPic && !config.dev) {
                 videoSensor.width = videoView.videoWidth;
                 videoSensor.height = videoView.videoHeight;
-                videoSensor.getContext('2d').drawImage(videoView, 0, 0);
+                videoSensor.getContext('2d').drawImage(videoView, 0, 0, 800, 600, 0, 0, 800, 600);
             }
             Photobooth.stopVideo('view');
         }

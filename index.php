@@ -142,7 +142,7 @@ $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $imag
 				<div class="loading"></div>
 			</div>
             <!--<canvas style="position: fixed; width: 100%; height: 100%" width="960" height="640"></canvas>-->
-            <img id="remoteVideo" src="http://localhost:8090/video-stream.mjpeg"/>
+            <video id="remoteVideo" src="http://localhost:8090/video-stream.mjpeg" autoplay playsinline></video>
 		</div>
 
 		<!-- Result Page -->

@@ -121,7 +121,7 @@ const photoBooth = (function () {
 
         const ctx = document.getElementById("remoteVideo").getContext("2d");
         const img = new Image();
-        img.src = "http://localhost:8090/video-stream.mjpeg"
+        img.src = "http://localhost:8090/video-stream.jpg"
         //img.src = config.background_image;
 
         Photobooth.previewVideoPlayer = window.setInterval(function () {

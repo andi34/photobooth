@@ -339,7 +339,7 @@ $configsetup = [
 		'background_image' => [
 			'type' => 'input',
 			'name' => 'background_image',
-			'placeholder' => 'url(http://localhost:8090/)',
+			'placeholder' => 'url(http://localhost:8090/video-stream.mjpeg)',
 			'value' => $config['background_image']
 		],
 		'background_admin' => [

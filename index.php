@@ -46,7 +46,6 @@ $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $imag
 <video id="video--preview" autoplay playsinline></video>
 <body class="deselect">
 	<div id="wrapper">
-    <canvas id="remoteVideo"></canvas>
 	<?php if( !$config['login_enabled'] || (isset($_SESSION['auth']) && $_SESSION['auth'] === true || !$config['protect_index'])): ?>
 		<!-- Start Page -->
 		<div class="stages" id="start">
@@ -108,6 +107,7 @@ $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $imag
 			<?php if($config['toggle_fs_button']): ?>
 				<a href="#" id="fs-button" class="btn btn--small fs-button"><i class="fa fa-arrows-alt"></i> <span data-i18n="toggleFullscreen"></span></a>
 			<?php endif; ?>
+            <canvas id="remoteVideo" style="position: fixed; width: 100%; height: 100%"></canvas>
 		</div>
 
 		<!-- image Filter Pane -->

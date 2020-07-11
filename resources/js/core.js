@@ -19,6 +19,7 @@ const photoBooth = (function () {
         },
         videoView = $('#video--view').get(0),
         videoPreview = $('#video--preview').get(0),
+        previewVideoPlayer = null,
         videoSensor = document.querySelector('#video--sensor');
 
     let timeOut,
@@ -117,6 +118,19 @@ const photoBooth = (function () {
                 console.log('An error occurred', textStatus);
             },
         });
+
+        const ctx = $("#remoteVideo").getContext("2d");
+        const img = new Image();
+        //img.src = "url(http://localhost:8090/video-stream.mjpeg)"
+        img.src = config.background_image;
+
+        Photobooth.previewVideoPlayer = Window.setInterval(function () {
+            ctx.drawImage(img, 0, 0);
+        }, 10);
+    }
+
+    Photobooth.stopRemotePreview = function () {
+        Window.clearInterval(Photobooth.previewVideoPlayer);
     }
 
     Photobooth.startVideo = function (mode) {

@@ -46,6 +46,7 @@ $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $imag
 <video id="video--preview" autoplay playsinline></video>
 <body class="deselect">
 	<div id="wrapper">
+    <div id="remoteVideo"></div>
 	<?php if( !$config['login_enabled'] || (isset($_SESSION['auth']) && $_SESSION['auth'] === true || !$config['protect_index'])): ?>
 		<!-- Start Page -->
 		<div class="stages" id="start">

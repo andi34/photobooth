@@ -126,6 +126,8 @@ const photoBooth = (function () {
 
         Photobooth.previewVideoPlayer = window.setInterval(function () {
             console.log("Updating Image")
+            const img = new Image();
+            img.src = "http://localhost:8090/video-stream.mjpeg"
             ctx.drawImage(img, 0, 0, 800, 600, 0, 0, 800, 600);
         }, 100);
     }

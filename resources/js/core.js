@@ -119,7 +119,7 @@ const photoBooth = (function () {
             },
         });
 
-        const ctx = document.getElementById("#remoteVideo").getContext("2d");
+        const ctx = document.getElementById("remoteVideo").getContext("2d");
         const img = new Image();
         //img.src = "url(http://localhost:8090/video-stream.mjpeg)"
         img.src = config.background_image;

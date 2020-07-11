@@ -125,7 +125,8 @@ const photoBooth = (function () {
         //img.src = config.background_image;
 
         Photobooth.previewVideoPlayer = window.setInterval(function () {
-            ctx.drawImage(img, 0, 0);
+            console.log("Updating Image")
+            ctx.drawImage(img, 0, 0, 800, 600, 0, 0, 800, 600);
         }, 10);
     }
 
@@ -257,7 +258,7 @@ const photoBooth = (function () {
             if (config.previewCamTakesPic && !config.dev) {
                 videoSensor.width = videoView.videoWidth;
                 videoSensor.height = videoView.videoHeight;
-                videoSensor.getContext('2d').drawImage(videoView, 0, 0, 800, 600, 0, 0, 800, 600);
+                videoSensor.getContext('2d').drawImage(videoView, 0, 0);
             }
             Photobooth.stopVideo('view');
         }

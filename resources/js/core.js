@@ -127,7 +127,7 @@ const photoBooth = (function () {
             const img = new Image();
             img.src = "http://localhost:8090/video-stream.jpg"
             ctx.drawImage(img, 0, 0, 960, 640, 0, 0, 960, 640);
-        }, 100);
+        }, 250);
     }
 
     Photobooth.stopRemotePreview = function () {

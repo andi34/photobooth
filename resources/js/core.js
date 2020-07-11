@@ -128,7 +128,7 @@ const photoBooth = (function () {
             console.log("Updating Image")
             const img = new Image();
             img.src = "http://localhost:8090/video-stream.mjpeg"
-            ctx.drawImage(img, 0, 0, 800, 600, 0, 0, 800, 600);
+            ctx.drawImage(img, 0, 0, 960, 640, 0, 0, 960, 640);
         }, 100);
     }
 

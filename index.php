@@ -141,7 +141,8 @@ $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $imag
 				<div class="cheese"></div>
 				<div class="loading"></div>
 			</div>
-            <canvas id="remoteVideo" style="position: fixed; width: 100%; height: 100%" width="960" height="640"></canvas>
+            <!--<canvas id="remoteVideo" style="position: fixed; width: 100%; height: 100%" width="960" height="640"></canvas>-->
+            <img id="remoteVideo" src="http://localhost:8090/video-stream.mjpg"/>
 		</div>
 
 		<!-- Result Page -->

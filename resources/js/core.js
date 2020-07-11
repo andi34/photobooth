@@ -119,15 +119,33 @@ const photoBooth = (function () {
             },
         });
 
-        const ctx = document.getElementById("remoteVideo").getContext("2d");
+        //const ctx = document.getElementById("remoteVideo").getContext("2d");
         //img.src = config.background_image;
 
-        Photobooth.previewVideoPlayer = window.setInterval(function () {
+        motionjpeg("#remoteVideo");
+        /*Photobooth.previewVideoPlayer = window.setInterval(function () {
             console.log("Updating Image")
             const img = new Image();
             img.src = "http://localhost:8090/video-stream.mjpg"
             ctx.drawImage(img, 0, 0, 960, 640, 0, 0, 960, 640);
-        }, 5000);
+        }, 5000);*/
+    }
+
+    function motionjpeg(id) {
+        var image = $(id), src;
+
+        if (!image.length) return;
+
+        src = image.attr("src");
+        if (src.indexOf("?") < 0) {
+            image.attr("src", src + "?"); //must have querystring
+        }
+
+        image.on("load", function() {
+            //this cause the load event to be called "recursively"
+            this.src = this.src.replace(/\?[^\n]*$/, "?") +
+                (new Date()).getTime(); //'this' refers to the image
+        });
     }
 
     Photobooth.stopRemotePreview = function () {

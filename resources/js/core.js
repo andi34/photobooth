@@ -122,7 +122,7 @@ const photoBooth = (function () {
         //const ctx = document.getElementById("remoteVideo").getContext("2d");
         //img.src = config.background_image;
 
-        motionjpeg("#remoteVideo");
+        window.setTimeout(function () {motionjpeg("#remoteVideo");}, 2000);
         /*Photobooth.previewVideoPlayer = window.setInterval(function () {
             console.log("Updating Image")
             const img = new Image();

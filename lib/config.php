@@ -31,7 +31,7 @@ $cmds = [
             'msg' => 'New file is in location'
         ],
         'start_preview' => [
-            'cmd' => 'gphoto2 --capture-movie=30s --stdout | ffmpeg -re -i pipe:0 -listen 1 -s 960x640 -f mjpeg http://localhost:8090/video-stream.jpg',
+            'cmd' => 'gphoto2 --capture-movie=30s --stdout | ffmpeg -f mjpeg -i pipe:0 -r 20 -vcodec libx264 -pix_fmt yuv420p -tune zerolatency -preset ultrafast -f mpegts "tcp://127.0.0.1:5001"',
             'msg' => 'Video preview has been launched'
         ],
         'print' => [

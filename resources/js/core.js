@@ -120,12 +120,12 @@ const photoBooth = (function () {
         });
 
         const ctx = document.getElementById("remoteVideo").getContext("2d");
-        const img = new Image();
-        img.src = "http://localhost:8090/video-stream.jpg"
         //img.src = config.background_image;
 
         Photobooth.previewVideoPlayer = window.setInterval(function () {
             console.log("Updating Image")
+            const img = new Image();
+            img.src = "http://localhost:8090/video-stream.jpg"
             ctx.drawImage(img, 0, 0, 960, 640, 0, 0, 960, 640);
         }, 100);
     }

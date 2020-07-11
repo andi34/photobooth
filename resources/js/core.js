@@ -119,7 +119,9 @@ const photoBooth = (function () {
             },
         });
 
-        document.getElementById("remoteVideo").src = "http://localhost:8090/video-stream.mjpeg";
+        window.setInterval(function () {
+            document.getElementById("remoteVideo").src = "http://localhost:8090/video-stream.mjpeg";
+        }, 100);
     }
 
     Photobooth.stopRemotePreview = function () {

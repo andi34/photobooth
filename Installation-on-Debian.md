@@ -210,6 +210,22 @@ sudo gpasswd -a www-data lp
 sudo gpasswd -a www-data lpadmin
 ```
 
+### Install Remote Buzzer support
+The following steps are optional, please only apply if you like to use the remote buzzer feature on a Raspberry PI. A reboot is needed to apply `dtoverlay` settings during Raspberry PI OS kernel startup.
+```
+usermod -a -G gpio www-data
+
+cat > /etc/udev/rules.d/20-photobooth-gpiomem.rules <<EOF
+SUBSYSTEM=="bcm2835-gpiomem", KERNEL=="gpiomem", GROUP="gpio", MODE="0660"
+EOF
+
+cat >> /boot/config.txt  << EOF
+dtoverlay=gpio-no-irq
+EOF
+```
+
+### Try it out
+
 Now you should restart your Raspberry Pi to apply those settings:
 ```
 reboot
@@ -224,6 +240,7 @@ If it is not working, your operation system probably automatically mounted your 
 ```
 sudo chmod -x /usr/lib/gvfs/gvfs-gphoto2-volume-monitor
 ```
+
 Now reboot or unmount your camera with the following commands (you get a list of mounted cameras with `gio mount -l`):
 ```
 gio mount -u gphoto2://YOUR-CAMERA

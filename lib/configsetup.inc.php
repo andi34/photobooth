@@ -238,7 +238,8 @@ $configsetup = [
 			'placeholder' => $defaultConfig['collage_layout'],
 			'options' => [
 				'2x2' => '2x2',
-				'2x4' => '2x4'
+				'2x4' => '2x4',
+				'2x4BI' => '2x4 + background image'
 			],
 			'value' => $config['collage_layout']
 		],

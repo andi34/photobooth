@@ -1024,7 +1024,7 @@ $configsetup = [
 		]
 	],
 	'remotebuzzer' => [
-		'platform' => 'linux', 
+		'platform' => 'all', 
 		'remotebuzzer_enabled' => [
 			'type' => 'checkbox',
 			'name' => 'remotebuzzer_enabled',

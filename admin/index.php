@@ -64,7 +64,7 @@ require_once('../lib/configsetup.inc.php');
 				<?php
 					$i = 0;
 					foreach($configsetup as $panel => $fields) {
-						if (! empty($fields['platform']) && $fields['platform'] != 'all' && $fields['platform'] != $os) {
+                                                if (! empty($fields['platform']) && $fields['platform'] != 'all' && $fields['platform'] != $os) {
                                                    continue;
                                                 };
 

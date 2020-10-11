@@ -99,6 +99,7 @@ if ($data['type'] == 'config') {
 
     if ($os === 'windows') {
         $newConfig['remotebuzzer_enabled'] = false;
+        $newConfig['synctodrive_enabled'] = false;
     }
 
     $content = "<?php\n\$config = ". var_export(arrayRecursiveDiff($newConfig, $defaultConfig), true) . ";";
@@ -113,8 +114,7 @@ if ($data['type'] == 'config') {
 }
 
 /* Kill service daemons after config has changed */
-/* this ensures services will be restarted (or not) in adherence to latest config after the change */
-require_once('../lib/services_config.php');
+require_once('../lib/services_stop.php');
 
 function arrayRecursiveDiff($aArray1, $aArray2)
 {

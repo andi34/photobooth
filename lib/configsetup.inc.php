@@ -1129,9 +1129,9 @@ $configsetup = [
 			'name' => 'remotebuzzer_logfile',
 			'value' => $config['remotebuzzer_logfile']
 		]
- 	],
+	],
 	'synctodrive' => [
-		'platform' => 'linux', 
+		'platform' => 'linux',
 		'synctodrive_enabled' => [
 			'type' => 'checkbox',
 			'name' => 'synctodrive_enabled',
@@ -1158,7 +1158,7 @@ $configsetup = [
 			'name' => 'synctodrive_logfile',
 			'value' => $config['synctodrive_logfile']
 		]
- 	],
+	],
 	'reset' => [
 		'remove_images' => [
 			'type' => 'checkbox',

@@ -98,6 +98,7 @@ function createArchive(fileName, archive) {
     archive.directory('node_modules/component-emitter');
     archive.directory('node_modules/component-inherit');
     archive.directory('node_modules/cookie');
+    archive.directory('node_modules/core-js');
     archive.directory('node_modules/debug');
     archive.directory('node_modules/engine.io');
     archive.directory('node_modules/engine.io-client');
@@ -114,6 +115,7 @@ function createArchive(fileName, archive) {
     archive.directory('node_modules/object-component');
     archive.directory('node_modules/parseqs');
     archive.directory('node_modules/parseuri');
+    archive.directory('node_modules/regenerator-runtime');
     archive.directory('node_modules/rpio');
     archive.directory('node_modules/socket.io');
     archive.directory('node_modules/socket.io-adapter');

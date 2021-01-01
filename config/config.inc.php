@@ -9,6 +9,7 @@ $config = array();
 // G E N E R A L
 // possible language values: de, el, en, es, fr, pl, it
 $config['language'] = 'en';
+$config['show_start_screen_title'] = true;
 $config['start_screen_title'] = 'Photobooth';
 $config['start_screen_subtitle'] = NULL;
 $config['dev'] = false;
@@ -92,6 +93,7 @@ $config['previewCamBackground'] = false;
 // U S E R   I N T E R F A C E
 // possible index_style values: "classic", "modern", "custom"
 $config['index_style'] = 'modern';
+$config['show_lines_hr'] = true;
 $config['font_size'] = '16px';
 $config['background_image'] = null;
 $config['background_admin'] = null;
@@ -138,7 +140,7 @@ $config['folders']['archives'] = 'archives';
 $config['is_event'] = true;
 $config['event']['textLeft'] = 'We';
 $config['event']['textRight'] = 'OpenSource';
-// possible event symbol values: 'fa-camera-retro', 'fa-birthday-cake', 'fa-gift', 'fa-tree', 'fa-snowflake-o', 'fa-heart-o', 
+// possible event symbol values: 'fa-camera-retro', 'fa-birthday-cake', 'fa-gift', 'fa-tree', 'fa-snowflake-o', 'fa-heart-o',
 //                               'fa-heart', 'fa-heartbeat', 'fa-apple', 'fa-anchor', 'fa-glass', 'fa-gears', 'fa-users'
 $config['event']['symbol'] = 'fa-heart-o';
 

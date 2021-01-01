@@ -8,14 +8,19 @@ require_once('lib/filter.php');
 $images = getImagesFromDB();
 $imagelist = ($config['newest_first'] === true) ? array_reverse($images) : $images;
 
-if ($config['index_style'] === 'modern') {
-	$btnClass1 = 'round-btn';
-	$btnClass2 = 'round-btn';
-	$galleryIcon = 'fa-picture-o';
-} else {
-	$btnClass1 = 'btn';
-	$btnClass2 = '';
-	$galleryIcon = 'fa-th';
+switch ($config['index_style']) {
+	case "modern":
+	case "trm-transparent":
+		$btnClass1 = 'round-btn';
+		$btnClass2 = 'round-btn';
+		$galleryIcon = 'fa-picture-o';
+		break;
+
+	default:
+		$btnClass1 = 'btn';
+		$btnClass2 = '';
+		$galleryIcon = 'fa-th';
+		break;
 }
 
 if ($config['use_live_keying']):
@@ -173,7 +178,7 @@ endif;
 	</div>
 
 	<div id="adminsettings">
-		<div style="position:absolute; bottom:0; right:0;">
+		<div style="position:relative; bottom:150px; right:0px; width:150px; height:150px;">
 			<img src="resources/img/spacer.png" alt="adminsettings" ondblclick="adminsettings()" />
 		</div>
 	<?php else:

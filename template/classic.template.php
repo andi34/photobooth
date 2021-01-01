@@ -7,30 +7,44 @@
 			<div class="startInner">
 				<?php if ($config['is_event']): ?>
 				<div class="names">
-					<hr class="small" />
+					<?php if ($config['show_lines_hr']): ?>
 					<hr>
+					<hr class="small" />
+					<?php endif; ?>
 					<div>
 						<h1><?=$config['event']['textLeft']?>
 							<i class="fa <?=$config['event']['symbol']?>" aria-hidden="true"></i>
 							<?=$config['event']['textRight']?>
+							<?php if ($config['show_start_screen_title']): ?>
 							<br>
 							<?=$config['start_screen_title']?>
+							<?php endif; ?>
 						</h1>
+						<?php if ($config['show_start_screen_title']): ?>
 						<h2><?=$config['start_screen_subtitle']?></h2>
+						<?php endif; ?>
 					</div>
+					<?php if ($config['show_lines_hr']): ?>
 					<hr>
 					<hr class="small" />
+					<?php endif; ?>
 				</div>
 				<?php else: ?>
 				<div class="names">
-					<hr class="small" />
+					<?php if ($config['show_lines_hr']): ?>
 					<hr>
+					<hr class="small" />
+					<?php endif; ?>
+					<?php if ($config['show_start_screen_title']): ?>
 					<div>
 						<h1><?=$config['start_screen_title']?></h1>
 						<h2><?=$config['start_screen_subtitle']?></h2>
 					</div>
+					<?php endif; ?>
+					<?php if ($config['show_lines_hr']): ?>
 					<hr>
 					<hr class="small" />
+					<?php endif; ?>
 				</div>
 				<?php endif; ?>
 

@@ -379,6 +379,8 @@
   "show_date": "Show date below images in Gallery (only works if dateformat images is used)",
   "show_error_messages": "Show error messages",
   "show_faq": "Open FAQ",
+  "show_start_screen_title":"Shows title and subtitle on start screen",
+  "show_lines_hr":"Show decorate Lines",
   "show_fork": "Show Fork Badge",
   "show_gallery": "Show Gallery",
   "show_manual": "Open Manual",

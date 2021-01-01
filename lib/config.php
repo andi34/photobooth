@@ -96,6 +96,37 @@ if (file_exists($my_config_file)) {
     $config = array_deep_merge($defaultConfig, $config);
 }
 
+switch ($config['language']) {
+    case 'de':
+    case 'DE':
+        $current_lang = 'de-DE';
+        break;
+    case 'el':
+    case 'EL':
+        $current_lang = 'el-EL';
+        break;
+    case 'es':
+    case 'ES':
+        $current_lang = 'es-ES';
+        break;
+    case 'fr':
+    case 'FR':
+        $current_lang = 'fr-FR';
+        break;
+    case 'pl':
+    case 'PL':
+        $current_lang = 'pl-PL';
+        break;
+    case 'it':
+    case 'IT':
+        $current_lang = 'it-IT';
+        break;
+    default:
+        $current_lang = 'en-EN';
+        break;
+}
+header('Content-Language: ' . $current_lang);
+
 if ($config['dev']) {
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);

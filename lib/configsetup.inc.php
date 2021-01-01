@@ -18,6 +18,11 @@ $configsetup = [
             ],
             'value' => $config['language'],
         ],
+        'show_start_screen_title' => [
+            'type' => 'checkbox',
+            'name' => 'show_start_screen_title',
+            'value' => $config['show_start_screen_title'],
+        ],
         'start_screen_title' => [
             'type' => 'input',
             'placeholder' => $defaultConfig['start_screen_title'],
@@ -416,9 +421,15 @@ $configsetup = [
             'options' => [
                 'classic' => 'classic',
                 'modern' => 'modern',
+                'trm-transparent' => 'trm-transparent',
                 'custom' => 'custom',
             ],
             'value' => $config['index_style'],
+        ],
+        'show_lines_hr' => [
+            'type' => 'checkbox',
+            'name' => 'show_lines_hr',
+            'value' => $config['show_lines_hr'],
         ],
         'font_size' => [
             'type' => 'input',

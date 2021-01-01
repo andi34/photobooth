@@ -379,6 +379,8 @@
   "show_date": "Datum in Galerie unter dem Foto anzeigen (funktioniert nur wenn Bilder mit Datum benannt werden)",
   "show_error_messages": "Fehlermeldungen anzeigen",
   "show_faq": "FAQ öffnen",
+  "show_start_screen_title":"Zeigt Titel und Untertitel auf der Startseite an",
+  "show_lines_hr":"Dekorative Linien anzeigen",
   "show_fork": "Fork Logo anzeigen",
   "show_gallery": "Galerie aktivieren",
   "show_manual": "Handbuch öffnen",

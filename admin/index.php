@@ -4,6 +4,7 @@ session_start();
 require_once('../lib/config.php');
 require_once('../lib/configsetup.inc.php');
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -157,6 +158,27 @@ require_once('../lib/configsetup.inc.php');
 		endif; ?>
 		</div>
 	</div>
+
+	<div style="position:sticky; width:225px; bottom:10px;">
+	<button class="save-btn">
+		<span class="save">
+			<span data-i18n="save"></span>
+		</span>
+		<span class="saving">
+			<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+			<span data-i18n="saving"></span>
+		</span>
+		<span class="success">
+			<i class="fa fa-check"></i>
+			<span data-i18n="success"></span>
+		</span>
+		<span class="error">
+			<i class="fa fa-times"></i>
+			<span data-i18n="saveerror"></span>
+		</span>
+	</button>
+	</div>
+
 
 	<script src="../node_modules/whatwg-fetch/dist/fetch.umd.js"></script>
 	<script type="text/javascript" src="../api/config.php"></script>

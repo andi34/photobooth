@@ -6,6 +6,8 @@ set -e
 # Show all commands
 # set -x
 
+RUNNING_ON_PI=true 
+
 if [ ! -z $1 ]; then
     webserver=$1
 else
@@ -20,21 +22,31 @@ function error {
     echo -e "\033[0;31m${1}\033[0m"
 }
 
+function no_raspberry {
+    error "WARNING: This reset script is only intended to run on a Raspberry Pi."
+    info "Running the script in ubuntu is possible, but PI specific features will be missing!"
+    read -p "Do you want to continue? (y/n)" -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        RUNNING_ON_PI=false
+        return
+    fi
+    exit ${1}
+}
+
 if [ $UID != 0 ]; then
-    error "ERROR: Only root is allowed to execute the installer. Forgot sudo?"
+    error "ERROR: Only root is allowed to execute the reset script. Forgot sudo?"
     exit 1
 fi
 
 if [ ! -f /proc/device-tree/model ]; then
-    error "ERROR: This installer is only intended to run on a Raspberry Pi."
-    exit 2
-fi
-
-PI_MODEL=$(tr -d '\0' </proc/device-tree/model)
-
-if [[ $PI_MODEL != Raspberry* ]]; then
-    error "ERROR: This installer is only intended to run on a Raspberry Pi."
-    exit 3
+    no_raspberry 2
+else
+    PI_MODEL=$(tr -d '\0' </proc/device-tree/model)
+    
+    if [[ $PI_MODEL != Raspberry* ]]; then
+        no_raspberry 3
+    fi
 fi
 
 if [[ ! -z $1 && ("$1" = "nginx" || "$1" = "lighttpd") ]]; then
@@ -46,12 +58,14 @@ fi
 COMMON_PACKAGES=(
     'git'
     'gphoto2'
+    'ffmpeg'
     'jq'
     'libimage-exiftool-perl'
     'nodejs'
     'npm'
     'php-gd'
     'php-zip'
+    'curl'
     'yarn'
     'rsync'
     'udisks2'
@@ -185,6 +199,10 @@ for package in "${COMMON_PACKAGES[@]}"; do
     fi
 done
 
+if [ "$RUNNING_ON_PI" = false ]; then
+    apt install -y v4l2loopback-dkms
+fi
+
 echo -e "\033[0;33m### Is Photobooth the only website on this system?"
 read -p "### Warning: If typing y, the whole /var/www/html folder will be removed! [y/N] " -n 1 -r deleteHtmlFolder
 echo -e "\033[0m"
@@ -249,7 +267,7 @@ else
     tar -xzvf /tmp/photobooth-latest.tar.gz -C $INSTALLFOLDERPATH
     cd $INSTALLFOLDERPATH
 fi
-
+if [ "$RUNNING_ON_PI" = true ]; then
 echo -e "\033[0;33m### Do you like to use a Raspberry Pi (HQ) Camera to take pictures?"
 read -p "### If yes, this will generate a personal configuration with all needed changes. [y/N] " -n 1 -r
 echo -e "\033[0m"
@@ -266,7 +284,7 @@ then
 );
 EOF
 fi
-
+fi
 info "### Setting permissions."
 chown -R www-data:www-data $INSTALLFOLDERPATH
 gpasswd -a www-data plugdev
@@ -295,7 +313,7 @@ echo -e "\033[0m"
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     apt install -y unclutter
-
+if [ "$RUNNING_ON_PI" = true ]; then
     cat >> /etc/xdg/lxsession/LXDE-pi/autostart <<EOF
 
 @xset s off
@@ -306,9 +324,12 @@ then
 @unclutter -idle 3
 
 EOF
-
+else
+    warning "not implemented yet!"
+fi
 fi
 
+if [ "$RUNNING_ON_PI" = true ]; then
 info "### Enable Nodejs GPIO access - please reboot in order to use the Remote Buzzer Feature"
 usermod -a -G gpio www-data
 cat > /etc/udev/rules.d/20-photobooth-gpiomem.rules <<EOF
@@ -348,6 +369,7 @@ ResultInactive=yes
 ResultActive=yes
 EOF
 
+fi
 fi
 
 info "### Congratulations you finished the install process."

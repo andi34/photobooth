@@ -227,7 +227,7 @@ then
     info "### Your wish is my command!"
 
     info "### Now we are going to install Photobooth."
-    git clone https://github.com/andi34/photobooth $INSTALLFOLDER
+    git clone https://github.com/metropo/photobooth $INSTALLFOLDER
     cd $INSTALLFOLDERPATH
 
     echo -e "\033[0;33m### Please select a version to install:"
@@ -259,7 +259,7 @@ else
     info "### Your wish is my command!"
 
     info "### Downloading the latest release and extracting it."
-    curl -s https://api.github.com/repos/andi34/photobooth/releases/latest |
+    curl -s https://api.github.com/repos/metropo/photobooth/releases/latest |
         jq '.assets[].browser_download_url | select(endswith(".tar.gz"))' |
         xargs curl -L --output /tmp/photobooth-latest.tar.gz
 

@@ -308,7 +308,7 @@ if [ "$RUNNING_ON_PI" = true ]; then
 
 EOF
 else
-    warning "not implemented yet!"
+    error "not implemented yet!"
 fi
 fi
 

@@ -110,14 +110,14 @@ if (file_exists($my_config_file)) {
     require_once $my_config_file;
 
     if (!isset($config['mail']['subject'])) {
-        if (isset($config['ui]['language']) {
+        if (isset($config['ui]['language'])) {
             $config['mail']['subject'] = $mailTemplates[$config['ui']['language']]['mail']['subject'];
         } else {
             $config['mail']['subject'] = $mailTemplates[$defaultConfig['ui']['language']]['mail']['subject'];
         }
     }
     if (!isset($config['mail']['text'])) {
-        if (isset($config['ui]['language']) {
+        if (isset($config['ui]['language'])) {
             $config['mail']['text'] = $mailTemplates[$config['ui']['language']]['mail']['text'];
         } else {
             $config['mail']['text'] = $mailTemplates[$defaultConfig['ui']['language']]['mail']['text'];

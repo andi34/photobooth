@@ -5,16 +5,3 @@ updates:
   schedule:
     interval: monthly
   open-pull-requests-limit: 10
-  ignore:
-  - dependency-name: "@babel/core"
-    versions:
-    - 7.13.8
-  - dependency-name: whatwg-fetch
-    versions:
-    - 3.6.2
-  - dependency-name: socket.io
-    versions:
-    - 3.1.2
-  - dependency-name: rpio
-    versions:
-    - 2.4.2

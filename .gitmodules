@@ -10,3 +10,6 @@
 [submodule "vendor/Seriously"]
 	path = vendor/Seriously
 	url = https://github.com/brianchirls/Seriously.js
+[submodule "vendor/CustomUbuntu"]
+	path = vendor/CustomUbuntu
+	url = https://github.com/mvallim/live-custom-ubuntu-from-scratch.git

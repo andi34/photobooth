@@ -93,11 +93,57 @@ if ($_POST['style'] === 'collage') {
         }
     }
 
-    $collageBasename = substr($filename_tmp, 0, -4);
+    $collageBasename = substr($file, 0, -4);
     $collageSrcImagePaths = [];
 
     for ($i = 0; $i < $config['collage']['limit']; $i++) {
-        $collageSrcImagePaths[] = $collageBasename . '-' . $i . '.jpg';
+        $filename = $collageBasename . '-' . $i . '.jpg';
+        $collageSrcImagePaths[] = $config['foldersAbs']['tmp'] . DIRECTORY_SEPARATOR . $filename;
+        $collageSrcImagePath = $config['foldersAbs']['tmp'] . DIRECTORY_SEPARATOR . $filename;
+
+        // Collage single images
+        if ($config['collage']['show_all']) {
+            $filename_single_photo = $config['foldersAbs']['images'] . DIRECTORY_SEPARATOR . $filename;
+            $filename_single_thumb = $config['foldersAbs']['thumbs'] . DIRECTORY_SEPARATOR . $filename;
+            $imageResource = imagecreatefromjpeg($collageSrcImagePath);
+
+            // image scale, create thumbnail
+            $thumbResource = resizeImage($collageSrcImagePath, $thumb_size, $thumb_size);
+
+            imagejpeg($thumbResource, $filename_single_thumb, $config['jpeg_quality']['thumb']);
+            imagedestroy($thumbResource);
+
+            if ($imageModified || ($config['jpeg_quality']['image'] >= 0 && $config['jpeg_quality']['image'] < 100)) {
+                imagejpeg($imageResource, $filename_single_photo, $config['jpeg_quality']['image']);
+                // preserve jpeg meta data
+                if ($config['picture']['preserve_exif_data'] && $config['exiftool']['cmd']) {
+                    $cmd = sprintf($config['exiftool']['cmd'], $collageSrcImagePath, $filename_single_photo);
+                    exec($cmd, $output, $returnValue);
+                    if ($returnValue) {
+                        die(
+                            json_encode([
+                                'error' => 'exiftool returned with an error code',
+                                'cmd' => $cmd,
+                                'returnValue' => $returnValue,
+                                'output' => $output,
+                            ])
+                        );
+                    }
+                }
+            } else {
+                copy($collageSrcImagePath, $filename_single_photo);
+            }
+
+            imagedestroy($imageResource);
+
+            // insert into database
+            if ($config['database']['enabled']) {
+                appendImageToDB($filename);
+            }
+
+            // Change permissions
+            chmod($filename_single_photo, octdec($picture_permissions));
+        }
     }
 
     if (!createCollage($collageSrcImagePaths, $filename_tmp)) {

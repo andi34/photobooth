@@ -591,6 +591,12 @@ $configsetup = [
             ],
             'value' => $config['collage']['layout'],
         ],
+        'collage_show_all' => [
+            'view' => 'basic',
+            'type' => 'checkbox',
+            'name' => 'collage[show_all]',
+            'value' => $config['collage']['show_all'],
+        ],
         'collage_key' => [
             'view' => 'expert',
             'type' => 'input',

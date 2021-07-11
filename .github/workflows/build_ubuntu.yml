@@ -1,0 +1,61 @@
+name: build-focal
+
+on:
+  push:
+    branches: [ dev ]
+#  pull_request:
+#    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build
+        run: |
+          cp custom-ubuntu-cfg.sh vendor/CustomUbuntu/scripts/config.sh
+          cd vendor/CustomUbuntu/scripts
+          # Setup CHROOT envornment
+          ./build.sh setup_host
+          # Copy install dependencies
+          ls -la
+          ls -la chroot
+          sudo mkdir -p chroot/root
+          sudo cp ../../../install-raspbian.sh chroot/root/
+          ls -la chroot
+          ls -la chroot/root
+          # Finish install
+          ./build.sh debootstrap -
+      - name: Compress
+        run: |
+          cd vendor/CustomUbuntu/scripts
+          gzip photobooth.iso
+# unfortunatley github does not seem to like huge (2GB) artifacts :(
+#      - name: Publish ISO
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: photobooth.iso.gz
+#          path: vendor/CustomUbuntu/scripts/photobooth.iso.gz
+      - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          username: ${{ secrets.SSH_USER }} 
+          server: ${{ secrets.SSH_SERVER }} 
+          ssh_private_key: ${{ secrets.SSH_KEY }} 
+          local_path: 'vendor/CustomUbuntu/scripts/photobooth.iso.gz'
+          remote_path: './'
+          args: '-o ConnectTimeout=5'
+#      - name: Release
+#        uses: softprops/action-gh-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: focal-latest
+#          prerelease: true
+#          files: |
+#            scripts/ubuntu-from-scratch.iso.gz

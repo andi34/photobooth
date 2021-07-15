@@ -886,6 +886,7 @@ const photoBooth = (function () {
                 cb();
             }
             count++;
+            api.resetTimeOut();
             if (config.preview.mode === 'gphoto' && config.picture.no_cheese && count === stop) {
                 api.stopPreviewVideo();
             }
